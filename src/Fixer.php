@@ -2,6 +2,7 @@
 
 namespace WeDevs\Fixer;
 
+
 /**
  * The fixer utility class.
  */
@@ -10,49 +11,138 @@ class Fixer
     public static function rules()
     {
         return  [
-            '@PSR2' => true,
+			'@PSR2' => true,
+            '@PhpCsFixer:risky' => true,
             'align_multiline_comment' => true,
-            'array_syntax' => ['syntax' => 'short'],
+            /*
+             * Arrays must be declared using
+             * long array syntax.
+             */
+            'array_syntax' => ['syntax' => 'long'],
             'binary_operator_spaces' => [
-                'align_double_arrow' => true,
-                'align_equals' => true,
+                'operators' => [
+                    // Use real tabs and not spaces,
+                    // Exception: if you have a block of code 
+                    // that would be more readable if things
+                    // are aligned, use spaces
+					'=' => 'align_single_space',
+                    '=>' => 'align_single_space_minimal',
+                    /*
+                     * Always put spaces on both sides of 
+                     * logical, comparison, string and 
+                     * assignment operators.
+                     */
+					'*' => 'single_space',
+					'/' => 'single_space',
+					'%' => 'single_space',
+					'<' => 'single_space',
+					'>' => 'single_space',
+					'|' => 'single_space',
+					'^' => 'single_space', 
+					'+' => 'single_space',
+					'-' => 'single_space',
+					'&' => 'single_space',
+					'&=' => 'single_space',
+					'&&' => 'single_space',
+					'||' => 'single_space',
+					'.=' => 'single_space',
+					'/=' => 'single_space',
+					'==' => 'single_space',
+					'>=' => 'single_space',
+					'===' => 'single_space',
+					'!=' => 'single_space',
+					'<>' => 'single_space',
+					'!==' => 'single_space',
+					'<=' => 'single_space',
+					'and' => 'single_space',
+					'or' => 'single_space',
+					'xor' => 'single_space',
+					'-=' => 'single_space',
+					'%=' => 'single_space',
+					'*=' => 'single_space',
+					'|=' => 'single_space',
+					'+=' => 'single_space',
+					'<<' => 'single_space',
+					'<<=' => 'single_space',
+					'>>' => 'single_space',
+					'>>=' => 'single_space',
+					'^=' => 'single_space',
+					'**' => 'single_space',
+					'**=' => 'single_space',
+					'<=>' => 'single_space',
+					'??' => 'single_space',
+					'??='=> 'single_space',
+				],
             ],
             'blank_line_after_opening_tag' => true,
             'blank_line_before_statement' => [
-                'statements' => ['return', 'try', 'if', 'while', 'for', 'foreach', 'do', 'case'],
+                'statements' => [
+					'return', 
+					'try', 
+					'if', 
+					'while', 
+					'for', 
+					'foreach', 
+					'do', 
+					'case',
+				],
             ],
             'braces' => [
                 'position_after_functions_and_oop_constructs' => 'same',
                 'allow_single_line_closure' => false,
             ],
             'cast_spaces' => ['space' => 'single'],
-            'class_attributes_separation' => ['elements' => ['method', 'const', 'property']],
+            'class_attributes_separation' => [
+				'elements' => [
+					'method' => 'one',
+					'const' => 'one',
+					'property' => 'one',
+				],
+			],
             'class_definition' => ['single_line' => true],
             'concat_space' => ['spacing' => 'one'],
-            'constant_case' => ['case' => 'lower'],
+            'constant_case' => ['case' => 'upper'],
             'dir_constant' => true,
+            /*
+             * Use elseif, not else if
+             */
             'elseif' => true,
             'full_opening_tag' => true,
             'fully_qualified_strict_types' => true,
             'function_declaration' => true,
+            'WeDevs/space_inside_brackets' => true,
             'WeDevs/space_inside_parenthesis' => true,
             'WeDevs/blank_line_after_class_opening' => true,
+			'no_spaces_inside_parenthesis' => false,
+			'no_blank_lines_after_class_opening' => false,
             'function_typehint_space' => true,
             'global_namespace_import' => ['import_classes' => true],
+            'header_comment' => [
+                'header' => 'Made with love.',
+                'comment_type' => 'PHPDoc',
+                'location' => 'after_open',
+                'separate' => 'bottom',
+            ],
             'include' => true,
             'line_ending' => true,
             'list_syntax' => ['syntax' => 'long'],
             'lowercase_cast' => true,
             'lowercase_keywords' => true,
             'lowercase_static_reference' => true,
-            'magic_constant_casing' => true,
+            'magic_constant_casing' => false,
             'magic_method_casing' => true,
             'method_argument_space' => true,
             'native_function_casing' => true,
             'method_chaining_indentation' => true,
             'native_function_type_declaration_casing' => true,
             'new_with_braces' => true,
-            'no_alternative_syntax' => true,
+            /*
+             * You are free to use the alternative syntax 
+             * for control structures especially in your 
+             * templates where PHP code is embedded within
+             * HTML.
+             */
+            'no_alternative_syntax' => false,
             'no_blank_lines_after_class_opening' => false,
             'no_blank_lines_after_phpdoc' => true,
             'no_empty_comment' => true,
@@ -70,13 +160,20 @@ class Fixer
             'no_mixed_echo_print' => true,
             'no_multiline_whitespace_around_double_arrow' => true,
             'no_short_bool_cast' => true,
-            'no_short_echo_tag' => true,
+            /*
+             * Never use shorthand PHP start tags
+             */
+			'echo_tag_syntax' => ['format' => 'long'],
             'no_singleline_whitespace_before_semicolons' => true,
             'no_spaces_around_offset' => ['positions' => ['outside']],
             'no_spaces_inside_parenthesis' => false,
             'no_superfluous_phpdoc_tags' => ['allow_mixed' => true, 'allow_unused_params' => true],
             'no_trailing_comma_in_list_call' => true,
             'no_trailing_comma_in_singleline_array' => true,
+            /*
+             * Remove trailing whitespace 
+             * at the end of each line of code
+             */
             'no_trailing_whitespace' => true,
             'no_unneeded_control_parentheses' => true,
             'no_unneeded_curly_braces' => true,
@@ -85,6 +182,7 @@ class Fixer
             'no_whitespace_before_comma_in_array' => true,
             'no_whitespace_in_blank_line' => true,
             'normalize_index_brace' => true,
+            'not_operator_with_successor_space' => true,
             'object_operator_without_whitespace' => true,
             'ordered_imports' => true,
             'php_unit_fqcn_annotation' => true,
@@ -102,16 +200,16 @@ class Fixer
             ],
             'phpdoc_annotation_without_dot' => true,
             'phpdoc_indent' => true,
-            'phpdoc_inline_tag' => true,
+            //'phpdoc_inline_tag' => true,
             'phpdoc_no_access' => true,
             'phpdoc_no_alias_tag' => true,
-            'phpdoc_no_package' => true,
+            'phpdoc_no_package' => false,
             'phpdoc_no_useless_inheritdoc' => true,
             'phpdoc_return_self_reference' => true,
             'phpdoc_scalar' => true,
             'phpdoc_separation' => true,
             'phpdoc_single_line_var_spacing' => true,
-            'phpdoc_to_comment' => true,
+            'phpdoc_to_comment' => false,
             'phpdoc_trim' => true,
             'phpdoc_trim_consecutive_blank_line_separation' => true,
             'phpdoc_types' => true,
@@ -129,6 +227,7 @@ class Fixer
                 'comment_types' => ['hash'],
             ],
             'single_line_throw' => true,
+            //If you’re not evaluating anything in the string, use single quotes.
             'single_quote' => true,
             'single_trait_insert_per_statement' => true,
             'space_after_semicolon' => [
@@ -136,10 +235,17 @@ class Fixer
             ],
             'standardize_increment' => true,
             'standardize_not_equals' => true,
+            'strict_comparison' => true,
             'ternary_operator_spaces' => true,
-            'trailing_comma_in_multiline_array' => true,
+            // 'trailing_comma_in_multiline_array' => true,
+			'trailing_comma_in_multiline' => [
+				'elements' => ['arrays']
+			],
             'trim_array_spaces' => false,
             'whitespace_after_comma_in_array' => true,
-        ];
+			'yoda_style' => [
+				'always_move_variable' => true,
+			],
+		];
     }
 }
