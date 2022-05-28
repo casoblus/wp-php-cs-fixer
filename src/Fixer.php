@@ -77,14 +77,18 @@ class Fixer
             'blank_line_after_opening_tag' => true,
             'blank_line_before_statement' => [
                 'statements' => [
-					'return', 
-					'try', 
-					'if', 
-					'while', 
-					'for', 
-					'foreach', 
-					'do', 
+                    'break', 
 					'case',
+                    'continue',
+                    'declare', 
+					'do', 
+					'for', 
+					'foreach',
+					'if', 
+					'return',
+                    'throw', 
+					'try', 
+					'while',
 				],
             ],
             'braces' => [
@@ -101,8 +105,9 @@ class Fixer
 			],
             'class_definition' => ['single_line' => true],
             'concat_space' => ['spacing' => 'one'],
-            'constant_case' => ['case' => 'upper'],
+            'constant_case' =>  false,
             'dir_constant' => true,
+            'echo_tag_syntax' => true,
             /*
              * Use elseif, not else if
              */
@@ -132,8 +137,9 @@ class Fixer
             'magic_constant_casing' => false,
             'magic_method_casing' => true,
             'method_argument_space' => true,
-            'native_function_casing' => true,
             'method_chaining_indentation' => true,
+            'native_constant_invocation' => true,
+            'native_function_casing' => true,
             'native_function_type_declaration_casing' => true,
             'new_with_braces' => true,
             /*
@@ -200,6 +206,7 @@ class Fixer
             ],
             'phpdoc_annotation_without_dot' => true,
             'phpdoc_indent' => true,
+            'phpdoc_inline_tag_normalizer' => true,
             //'phpdoc_inline_tag' => true,
             'phpdoc_no_access' => true,
             'phpdoc_no_alias_tag' => true,
@@ -223,9 +230,8 @@ class Fixer
             'short_scalar_cast' => true,
             'single_blank_line_before_namespace' => true,
             'single_class_element_per_statement' => true,
-            'single_line_comment_style' => [
-                'comment_types' => ['hash'],
-            ],
+            'single_line_comment_style' => true,
+            'single_line_comment_spacing'=> true,
             'single_line_throw' => true,
             //If you’re not evaluating anything in the string, use single quotes.
             'single_quote' => true,
@@ -233,14 +239,18 @@ class Fixer
             'space_after_semicolon' => [
                 'remove_in_empty_for_expressions' => true,
             ],
+            'ternary_to_elvis_operator' => false, 
+            'ternary_to_null_coalescing' => true,
             'standardize_increment' => true,
             'standardize_not_equals' => true,
             'strict_comparison' => true,
             'ternary_operator_spaces' => true,
             // 'trailing_comma_in_multiline_array' => true,
 			'trailing_comma_in_multiline' => [
-				'elements' => ['arrays']
+				'elements' => ['arrays'],
+                'after_heredoc' => true,
 			],
+            
             'trim_array_spaces' => false,
             'whitespace_after_comma_in_array' => true,
 			'yoda_style' => [
